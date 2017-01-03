@@ -1,5 +1,5 @@
 /*
- * Copyright 2016 HM Revenue & Customs
+ * Copyright 2017 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -66,6 +66,8 @@ class TaxYearSpec extends WordSpecLike with Matchers {
     "Return 2012 when the current UK time is 23:59:59.999 on 2013/4/5" in new setUp {
       givenIts(new DateTime(2013, 4, 5, 23, 59, 59, 999, DateTimeZone.forID("Europe/London")))
       current shouldBe _2012_13
+      current.currentYear shouldBe current.startYear
+      current.currentYear shouldBe 2012
     }
 
     "Return 2013 when the current UK time is 00:00:00.000 on 2013/4/6" in new setUp {
