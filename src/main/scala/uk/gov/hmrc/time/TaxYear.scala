@@ -1,5 +1,5 @@
 /*
- * Copyright 2016 HM Revenue & Customs
+ * Copyright 2017 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,16 +22,19 @@ import scala.collection.immutable.Range.Inclusive
 
 case class TaxYear(startYear: Int) {
 
-  def finishYear: Int = startYear + 1
+  lazy val finishYear: Int = startYear + 1
   def starts: LocalDate = TaxYear.firstDayOfTaxYear(startYear)
   def startInstant: DateTime = starts.toDateTimeAtStartOfDay(TaxYear.ukTime)
-  def finishes: LocalDate = new LocalDate(finishYear, 4, 5)
+  lazy val finishes: LocalDate = new LocalDate(finishYear, 4, 5)
   def finishInstant: DateTime = next.startInstant
 
   def back(years: Int): TaxYear = TaxYear(startYear - years)
-  def previous: TaxYear = back(1)
+  lazy val previous: TaxYear = back(1)
+
+  lazy val currentYear : Int = startYear
+
   def forwards(years: Int): TaxYear = TaxYear(startYear + years)
-  def next: TaxYear = forwards(1)
+  lazy val next: TaxYear = forwards(1)
 
   def contains(date: LocalDate) = !(date.isBefore(starts) || date.isAfter(finishes))
 
