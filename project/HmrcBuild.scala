@@ -1,27 +1,31 @@
 import sbt.Keys._
 import sbt._
+import uk.gov.hmrc.{SbtArtifactory, SbtAutoBuildPlugin}
 import uk.gov.hmrc.versioning.SbtGitVersioning
+import uk.gov.hmrc.versioning.SbtGitVersioning.autoImport.majorVersion
 
 object HmrcBuild extends Build {
 
   import BuildDependencies._
-  import uk.gov.hmrc.DefaultBuildSettings._
-  import uk.gov.hmrc.SbtAutoBuildPlugin
 
   val appName = "tax-year"
 
   lazy val taxYear = (project in file("."))
-    .enablePlugins(SbtAutoBuildPlugin, SbtGitVersioning)
+    .enablePlugins(SbtAutoBuildPlugin, SbtGitVersioning, SbtArtifactory)
     .settings(
-      name := "tax-year",
+      name := appName,
       libraryDependencies ++= Seq(
         Compile.nscalaTime,
         Test.scalaTest,
         Test.pegdown
       ),
-      scalaVersion := "2.11.8",
+      scalaVersion := "2.11.12",
       crossScalaVersions := Seq("2.11.8"),
       developers := List(Developer("andy-gray", "Andrew Gray", "andrew.gray@digital.hmrc.gov.uk", new URL("http://www.hmrc.gov.uk")))
+    )
+    .settings(majorVersion := 0)
+    .settings(resolvers += Resolver.bintrayRepo("hmrc", "releases"),
+      resolvers += "hmrc-releases" at "https://artefacts.tax.service.gov.uk/artifactory/hmrc-releases/"
     )
 }
 
