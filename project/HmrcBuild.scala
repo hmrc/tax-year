@@ -3,6 +3,8 @@ import sbt._
 import uk.gov.hmrc.{SbtArtifactory, SbtAutoBuildPlugin}
 import uk.gov.hmrc.versioning.SbtGitVersioning
 import uk.gov.hmrc.versioning.SbtGitVersioning.autoImport.majorVersion
+import uk.gov.hmrc.SbtArtifactory.autoImport.makePublicallyAvailableOnBintray
+
 
 object HmrcBuild extends Build {
 
@@ -24,6 +26,7 @@ object HmrcBuild extends Build {
       developers := List(Developer("andy-gray", "Andrew Gray", "andrew.gray@digital.hmrc.gov.uk", new URL("http://www.hmrc.gov.uk")))
     )
     .settings(majorVersion := 0)
+    .settings(makePublicallyAvailableOnBintray := true)
     .settings(resolvers += Resolver.bintrayRepo("hmrc", "releases"),
       resolvers += "hmrc-releases" at "https://artefacts.tax.service.gov.uk/artifactory/hmrc-releases/"
     )
@@ -32,7 +35,7 @@ object HmrcBuild extends Build {
 private object BuildDependencies {
 
   object Compile {
-    val nscalaTime = "com.github.nscala-time" %% "nscala-time" % "2.2.0"
+    val nscalaTime = "com.github.nscala-time" %% "nscala-time" % "2.22.0"
   }
 
   sealed abstract class Test(scope: String) {

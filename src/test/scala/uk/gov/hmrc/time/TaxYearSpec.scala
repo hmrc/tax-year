@@ -32,6 +32,11 @@ class TaxYearSpec extends WordSpecLike with Matchers {
   val _2012_13 = TaxYear(2012)
   val _2013_14 = TaxYear(2013)
   val _2014_15 = TaxYear(2014)
+  val _2015_16 = TaxYear(2015)
+  val _2016_17 = TaxYear(2016)
+  val _2017_18 = TaxYear(2017)
+  val _2018_19 = TaxYear(2018)
+  val _2019_20 = TaxYear(2019)
 
 
   "Requesting the tax year for a date" should {
@@ -59,6 +64,51 @@ class TaxYearSpec extends WordSpecLike with Matchers {
     "Return 2014 when the date is 2014/4/6" in new setUp {
       taxYearFor(new LocalDate(2014, 4, 6)) shouldBe _2014_15
     }
+
+    "Return 2014 when the date is 2015/4/5" in new setUp {
+      taxYearFor(new LocalDate(2015, 4, 5)) shouldBe _2014_15
+    }
+
+    "Return 2015 when the date is 2015/4/6" in new setUp {
+      taxYearFor(new LocalDate(2015, 4, 6)) shouldBe _2015_16
+    }
+
+    "Return 2015 when the date is 2016/4/5" in new setUp {
+      taxYearFor(new LocalDate(2016, 4, 5)) shouldBe _2015_16
+    }
+
+    "Return 2016 when the date is 2016/4/6" in new setUp {
+      taxYearFor(new LocalDate(2016, 4, 6)) shouldBe _2016_17
+    }
+
+    "Return 2016 when the date is 2017/4/5" in new setUp {
+      taxYearFor(new LocalDate(2017, 4, 5)) shouldBe _2016_17
+    }
+
+    "Return 2017 when the date is 2017/4/6" in new setUp {
+      taxYearFor(new LocalDate(2017, 4, 6)) shouldBe _2017_18
+    }
+
+    "Return 2017 when the date is 2018/4/5" in new setUp {
+      taxYearFor(new LocalDate(2018, 4, 5)) shouldBe _2017_18
+    }
+
+    "Return 2018 when the date is 2018/4/6" in new setUp {
+      taxYearFor(new LocalDate(2018, 4, 6)) shouldBe _2018_19
+    }
+
+    "Return 2018 when the date is 2019/4/5" in new setUp {
+      taxYearFor(new LocalDate(2019, 4, 5)) shouldBe _2018_19
+    }
+
+    "Return 2019 when the date is 2019/4/6" in new setUp {
+      taxYearFor(new LocalDate(2019, 4, 6)) shouldBe _2019_20
+    }
+
+    "Return 2019 when the date is 2020/4/5" in new setUp {
+      taxYearFor(new LocalDate(2020, 4, 5)) shouldBe _2019_20
+    }
+
   }
 
   "Requesting the current" should {
