@@ -3,7 +3,7 @@ import sbt._
 object LibraryDependencies {
 
   val compile: Seq[ModuleID] = Seq(
-    "com.github.nscala-time" %% "nscala-time" % "2.22.0"
+    "org.threeten" % "threeten-extra" % "1.5.0"
   )
 
   trait TestDependencies {

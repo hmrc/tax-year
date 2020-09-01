@@ -16,97 +16,98 @@
 
 package uk.gov.hmrc.time
 
-import org.joda.time.{ DateTimeZone, DateTime, LocalDate }
+import java.time.{ ZoneId, ZonedDateTime, LocalDate }
 import org.scalatest.{WordSpecLike, Matchers}
 
 class TaxYearSpec extends WordSpecLike with Matchers {
 
   class setUp extends CurrentTaxYear {
     
-    var now = () => new DateTime(2013, 9, 24, 11, 39, 55, 222, DateTimeZone.forID("Europe/London"))
-    
-    def givenIts(when: DateTime): Unit = now = () => when
+    var now: () => LocalDate = () => LocalDate.of(2013, 9, 24)
+
+    def givenIts(when: ZonedDateTime): Unit = now = () => when.toLocalDate
   }
 
-  val _2011_12 = TaxYear(2011)
-  val _2012_13 = TaxYear(2012)
-  val _2013_14 = TaxYear(2013)
-  val _2014_15 = TaxYear(2014)
-  val _2015_16 = TaxYear(2015)
-  val _2016_17 = TaxYear(2016)
-  val _2017_18 = TaxYear(2017)
-  val _2018_19 = TaxYear(2018)
-  val _2019_20 = TaxYear(2019)
+  private val _2011_12 = TaxYear(2011)
+  private val _2012_13 = TaxYear(2012)
+  private val _2013_14 = TaxYear(2013)
+  private val _2014_15 = TaxYear(2014)
+  private val _2015_16 = TaxYear(2015)
+  private val _2016_17 = TaxYear(2016)
+  private val _2017_18 = TaxYear(2017)
+  private val _2018_19 = TaxYear(2018)
+  private val _2019_20 = TaxYear(2019)
 
+  private val ukTimeZone = ZoneId.of("Europe/London")
 
   "Requesting the tax year for a date" should {
 
     "Return 2012 when the date is 2013/4/5" in new setUp {
-      taxYearFor(new LocalDate(2013, 4, 5)) shouldBe _2012_13
+      taxYearFor(LocalDate.of(2013, 4, 5)) shouldBe _2012_13
     }
 
     "Return 2013 when the date is 2013/4/6" in new setUp {
-      taxYearFor(new LocalDate(2013, 4, 6)) shouldBe _2013_14
+      taxYearFor(LocalDate.of(2013, 4, 6)) shouldBe _2013_14
     }
 
     "Return 2013 when the date is 2013/9/24" in new setUp {
-      taxYearFor(new LocalDate(2013, 9, 24)) shouldBe _2013_14
+      taxYearFor(LocalDate.of(2013, 9, 24)) shouldBe _2013_14
     }
 
     "Return 2013 when the date is 2014/2/1" in new setUp {
-      taxYearFor(new LocalDate(2014, 2, 1)) shouldBe _2013_14
+      taxYearFor(LocalDate.of(2014, 2, 1)) shouldBe _2013_14
     }
 
     "Return 2013 when the date is 2014/4/5" in new setUp {
-      taxYearFor(new LocalDate(2014, 4, 5)) shouldBe _2013_14
+      taxYearFor(LocalDate.of(2014, 4, 5)) shouldBe _2013_14
     }
 
     "Return 2014 when the date is 2014/4/6" in new setUp {
-      taxYearFor(new LocalDate(2014, 4, 6)) shouldBe _2014_15
+      taxYearFor(LocalDate.of(2014, 4, 6)) shouldBe _2014_15
     }
 
     "Return 2014 when the date is 2015/4/5" in new setUp {
-      taxYearFor(new LocalDate(2015, 4, 5)) shouldBe _2014_15
+      taxYearFor(LocalDate.of(2015, 4, 5)) shouldBe _2014_15
     }
 
     "Return 2015 when the date is 2015/4/6" in new setUp {
-      taxYearFor(new LocalDate(2015, 4, 6)) shouldBe _2015_16
+      taxYearFor(LocalDate.of(2015, 4, 6)) shouldBe _2015_16
     }
 
     "Return 2015 when the date is 2016/4/5" in new setUp {
-      taxYearFor(new LocalDate(2016, 4, 5)) shouldBe _2015_16
+      taxYearFor(LocalDate.of(2016, 4, 5)) shouldBe _2015_16
     }
 
     "Return 2016 when the date is 2016/4/6" in new setUp {
-      taxYearFor(new LocalDate(2016, 4, 6)) shouldBe _2016_17
+      taxYearFor(LocalDate.of(2016, 4, 6)) shouldBe _2016_17
     }
 
     "Return 2016 when the date is 2017/4/5" in new setUp {
-      taxYearFor(new LocalDate(2017, 4, 5)) shouldBe _2016_17
+      taxYearFor(LocalDate.of(2017, 4, 5)) shouldBe _2016_17
     }
 
     "Return 2017 when the date is 2017/4/6" in new setUp {
-      taxYearFor(new LocalDate(2017, 4, 6)) shouldBe _2017_18
+      taxYearFor(LocalDate.of(2017, 4, 6)) shouldBe _2017_18
     }
 
     "Return 2017 when the date is 2018/4/5" in new setUp {
-      taxYearFor(new LocalDate(2018, 4, 5)) shouldBe _2017_18
+      taxYearFor(LocalDate.of(2018, 4, 5)) shouldBe _2017_18
     }
 
     "Return 2018 when the date is 2018/4/6" in new setUp {
-      taxYearFor(new LocalDate(2018, 4, 6)) shouldBe _2018_19
+      taxYearFor(LocalDate.of(2018, 4, 6)) shouldBe _2018_19
     }
 
     "Return 2018 when the date is 2019/4/5" in new setUp {
-      taxYearFor(new LocalDate(2019, 4, 5)) shouldBe _2018_19
+      taxYearFor(LocalDate.of(2019, 4, 5)) shouldBe _2018_19
     }
 
     "Return 2019 when the date is 2019/4/6" in new setUp {
-      taxYearFor(new LocalDate(2019, 4, 6)) shouldBe _2019_20
+      taxYearFor(LocalDate.of(2019, 4, 6)) shouldBe _2019_20
     }
 
     "Return 2019 when the date is 2020/4/5" in new setUp {
-      taxYearFor(new LocalDate(2020, 4, 5)) shouldBe _2019_20
+      taxYearFor(LocalDate.of(2020, 4, 5)) shouldBe _2019_20
     }
 
   }
@@ -114,34 +115,34 @@ class TaxYearSpec extends WordSpecLike with Matchers {
   "Requesting the current" should {
 
     "Return 2012 when the current UK time is 23:59:59.999 on 2013/4/5" in new setUp {
-      givenIts(new DateTime(2013, 4, 5, 23, 59, 59, 999, DateTimeZone.forID("Europe/London")))
+      givenIts(ZonedDateTime.of(2013, 4, 5, 23, 59, 59, 999, ukTimeZone))
       current shouldBe _2012_13
       current.currentYear shouldBe current.startYear
       current.currentYear shouldBe 2012
     }
 
     "Return 2013 when the current UK time is 00:00:00.000 on 2013/4/6" in new setUp {
-      givenIts(new DateTime(2013, 4, 6, 0, 0, 0, 0, DateTimeZone.forID("Europe/London")))
+      givenIts(ZonedDateTime.of(2013, 4, 6, 0, 0, 0, 0, ukTimeZone))
       current shouldBe _2013_14
     }
 
     "Return 2013 when the current UK time is 11:06:23.323 on 2013/9/24" in new setUp {
-      givenIts(new DateTime(2013, 9, 24, 11, 6, 23, 323, DateTimeZone.forID("Europe/London")))
+      givenIts(ZonedDateTime.of(2013, 9, 24, 11, 6, 23, 323, ukTimeZone))
       current shouldBe _2013_14
     }
 
     "Return 2013 when the current UK time is 11:06:23.323 on 2014/2/1" in new setUp {
-      givenIts(new DateTime(2014, 2, 1, 11, 6, 23, 323, DateTimeZone.forID("Europe/London")))
+      givenIts(ZonedDateTime.of(2014, 2, 1, 11, 6, 23, 323, ukTimeZone))
       current shouldBe _2013_14
     }
 
     "Return 2013 when the current UK time is 23:59:59.999 on 2014/4/5" in new setUp {
-      givenIts(new DateTime(2014, 4, 5, 23, 59, 59, 999, DateTimeZone.forID("Europe/London")))
+      givenIts(ZonedDateTime.of(2014, 4, 5, 23, 59, 59, 999, ukTimeZone))
       current shouldBe _2013_14
     }
 
     "Return 2014 when the current UK time is 00:00:00.000 on 2014/4/6" in new setUp {
-      givenIts(new DateTime(2014, 4, 6, 0, 0, 0, 0, DateTimeZone.forID("Europe/London")))
+      givenIts(ZonedDateTime.of(2014, 4, 6, 0, 0, 0, 0, ukTimeZone))
       current shouldBe _2014_15
     }
   }
@@ -149,47 +150,47 @@ class TaxYearSpec extends WordSpecLike with Matchers {
 
   "the tax year 2012-13" should {
     "start on 2012/4/6" in {
-      _2012_13.starts shouldBe new LocalDate(2012, 4, 6)
+      _2012_13.starts shouldBe LocalDate.of(2012, 4, 6)
     }
     "start at exactly 00:00:00 on 2012/4/6" in {
-      _2012_13.startInstant shouldBe new DateTime(2012, 4, 6, 0, 0, 0, 0, DateTimeZone.forID("Europe/London"))
+      _2012_13.startInstant shouldBe ZonedDateTime.of(2012, 4, 6, 0, 0, 0, 0, ukTimeZone)
     }
     "finish on 2013/4" in {
-      _2012_13.finishes shouldBe new LocalDate(2013, 4, 5)
+      _2012_13.finishes shouldBe LocalDate.of(2013, 4, 5)
     }
     "end at exactly at 00:00:00 on 2013/4/6" in {
-      _2012_13.finishInstant shouldBe new DateTime(2013, 4, 6, 0, 0, 0, 0, DateTimeZone.forID("Europe/London"))
+      _2012_13.finishInstant shouldBe ZonedDateTime.of(2013, 4, 6, 0, 0, 0, 0, ukTimeZone)
     }
     "span 00:00:00 on 2012/4/6 until 00:00:00 on 2013/4/6" in {
-      _2012_13.interval.getStart shouldBe new DateTime(2012, 4, 6, 0, 0, 0, 0, DateTimeZone.forID("Europe/London"))
-      _2012_13.interval.getEnd shouldBe new DateTime(2013, 4, 6, 0, 0, 0, 0, DateTimeZone.forID("Europe/London"))
+      _2012_13.interval.getStart shouldBe ZonedDateTime.of(2012, 4, 6, 0, 0, 0, 0, ukTimeZone).toInstant
+      _2012_13.interval.getEnd shouldBe ZonedDateTime.of(2013, 4, 6, 0, 0, 0, 0, ukTimeZone).toInstant
     }
     "not contain 5th April 2012 as that's in the last tax year" in {
-      _2012_13.contains(new LocalDate(2012, 4, 5)) shouldBe false
+      _2012_13.contains(LocalDate.of(2012, 4, 5)) shouldBe false
     }
 
     "contain 6th April 2012" in {
-      _2012_13.contains(new LocalDate(2012, 4, 6)) shouldBe true
+      _2012_13.contains(LocalDate.of(2012, 4, 6)) shouldBe true
     }
     
     "contain 31st Dec 2012" in {
-      _2012_13.contains(new LocalDate(2012, 12, 31)) shouldBe true
+      _2012_13.contains(LocalDate.of(2012, 12, 31)) shouldBe true
     }
 
     "contain 1st January 2013" in {
-      _2012_13.contains(new LocalDate(2013, 1, 1)) shouldBe true
+      _2012_13.contains(LocalDate.of(2013, 1, 1)) shouldBe true
     }
 
     "contain 5th April 2013" in {
-      _2012_13.contains(new LocalDate(2013, 4, 5)) shouldBe true
+      _2012_13.contains(LocalDate.of(2013, 4, 5)) shouldBe true
     }
 
     "not contain 6th April 2013 as that's in the NEXT tax year" in {
-      _2012_13.contains(new LocalDate(2013, 4, 6)) shouldBe false
+      _2012_13.contains(LocalDate.of(2013, 4, 6)) shouldBe false
     }
 
     "not contain 1st Jan 2013 as that's in the NEXT tax year" in {
-      _2012_13.contains(new LocalDate(2014, 1, 1)) shouldBe false
+      _2012_13.contains(LocalDate.of(2014, 1, 1)) shouldBe false
     }
 
     "be preceded by 2011-12" in {

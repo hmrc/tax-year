@@ -16,7 +16,9 @@
 
 package uk.gov.hmrc.time
 
-import org.joda.time.{DateTime, Interval, LocalDate}
+import java.time.{LocalDate, ZonedDateTime}
+
+import org.threeten.extra.Interval
 
 import scala.collection.immutable.Range.Inclusive
 
@@ -24,9 +26,9 @@ case class TaxYear(startYear: Int) {
 
   lazy val finishYear: Int = startYear + 1
   def starts: LocalDate = TaxYear.firstDayOfTaxYear(startYear)
-  def startInstant: DateTime = starts.toDateTimeAtStartOfDay(TaxYear.ukTime)
-  lazy val finishes: LocalDate = new LocalDate(finishYear, 4, 5)
-  def finishInstant: DateTime = next.startInstant
+  def startInstant: ZonedDateTime = starts.atStartOfDay(TaxYear.ukTime)
+  lazy val finishes: LocalDate = LocalDate.of(finishYear, 4, 5)
+  def finishInstant: ZonedDateTime = next.startInstant
 
   def back(years: Int): TaxYear = TaxYear(startYear - years)
   lazy val previous: TaxYear = back(1)
@@ -36,14 +38,14 @@ case class TaxYear(startYear: Int) {
   def forwards(years: Int): TaxYear = TaxYear(startYear + years)
   lazy val next: TaxYear = forwards(1)
 
-  def contains(date: LocalDate) = !(date.isBefore(starts) || date.isAfter(finishes))
+  def contains(date: LocalDate): Boolean = !(date.isBefore(starts) || date.isAfter(finishes))
 
   def yearRange: Inclusive = startYear to finishYear
-  def interval = new Interval(startInstant, finishInstant)
+  def interval: Interval = Interval.of(startInstant.toInstant, finishInstant.toInstant)
 
   override def toString = s"$startYear to $finishYear"
 }
 
 object TaxYear extends CurrentTaxYear with (Int => TaxYear) {
-  override def now = () => DateTime.now
+  override def now: () => LocalDate = () => LocalDate.now(ukTime)
 }
