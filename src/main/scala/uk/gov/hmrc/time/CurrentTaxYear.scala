@@ -16,19 +16,19 @@
 
 package uk.gov.hmrc.time
 
-import org.joda.time.{DateTime, DateTimeZone, LocalDate, MonthDay}
+import java.time.{ZonedDateTime, ZoneId, LocalDate, MonthDay}
 
 trait CurrentTaxYear {
 
-  final val ukTime: DateTimeZone = DateTimeZone.forID("Europe/London")
+  final val ukTime: ZoneId = ZoneId.of("Europe/London")
 
-  private val startOfTaxYear = new MonthDay(4, 6)
+  private val startOfTaxYear = MonthDay.of(4, 6)
 
-  def now: () => DateTime
+  def now: () => LocalDate
 
-  final def firstDayOfTaxYear(year: Int) = startOfTaxYear.toLocalDate(year)
+  final def firstDayOfTaxYear(year: Int): LocalDate = startOfTaxYear.atYear(year)
 
-  final def today = new LocalDate(now(), ukTime)
+  final def today = now()
 
   final def taxYearFor(date: LocalDate): TaxYear = {
     if (date isBefore firstDayOfTaxYear(date.getYear))
