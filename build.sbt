@@ -1,5 +1,4 @@
 lazy val taxYear = (project in file("."))
-  .enablePlugins(SbtAutoBuildPlugin, SbtGitVersioning, SbtArtifactory)
   .settings(
     name := "tax-year",
     libraryDependencies ++= LibraryDependencies(),
@@ -15,8 +14,8 @@ lazy val taxYear = (project in file("."))
     )
   )
   .settings(majorVersion := 1)
-  .settings(makePublicallyAvailableOnBintray := true)
+  .settings(isPublicArtefact := true)
   .settings(
-    resolvers += Resolver.bintrayRepo("hmrc", "releases"),
+    resolvers += Resolver.typesafeRepo("releases"),
     resolvers += "hmrc-releases" at "https://artefacts.tax.service.gov.uk/artifactory/hmrc-releases/"
   )
