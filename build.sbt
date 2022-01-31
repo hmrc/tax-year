@@ -15,6 +15,7 @@ lazy val taxYear = (project in file("."))
   )
   .settings(majorVersion := 1)
   .settings(isPublicArtefact := true)
+  .settings(ScoverageSettings())
   .settings(
     resolvers += Resolver.typesafeRepo("releases"),
     resolvers += "hmrc-releases" at "https://artefacts.tax.service.gov.uk/artifactory/hmrc-releases/"
