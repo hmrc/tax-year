@@ -12,7 +12,7 @@ lazy val taxYear = (project in file("."))
       )
     )
   )
-  .settings(majorVersion := 1)
+  .settings(majorVersion := 2)
   .settings(isPublicArtefact := true)
   .settings(ScoverageSettings())
   .settings(
