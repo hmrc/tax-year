@@ -1,6 +1,6 @@
 tax-year
 ====
-[![Build Status](https://travis-ci.org/hmrc/tax-year.svg?branch=master)](https://travis-ci.org/hmrc/tax-year) [ ![Download](https://api.bintray.com/packages/hmrc/releases/tax-year/images/download.svg) ](https://bintray.com/hmrc/releases/tax-year/_latestVersion)
+[Download](https://open.artefacts.tax.service.gov.uk/maven2/uk/gov/hmrc/tax-year_2.13/)
 
 This is a UK tax year utility.
 
@@ -9,6 +9,7 @@ This is a UK tax year utility.
 * getting the current tax year.
 * determining the extent of a tax year
 * navigating tax years
+* support scala 2.13 with version 2 and above
 
 ### Adding tax-year as a dependency
 
