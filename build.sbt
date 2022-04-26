@@ -30,12 +30,10 @@ libraryDependencies := {
   CrossVersion.partialVersion(scalaVersion.value) match {
     case Some((2, scalaMajor)) if scalaMajor <= 11 =>
       libraryDependencies.value ++ Seq(
-        "org.scalatestplus.play" %% "scalatestplus-play"        % "4.0.3"       % Test,
         "org.scalatestplus"      %% "scalatestplus-scalacheck"  % "3.1.0.0-RC2" % Test
       )
     case _ =>
       libraryDependencies.value ++ Seq(
-        "org.scalatestplus.play" %% "scalatestplus-play"        % "5.1.0"       % Test,
         "org.scalatestplus"      %% "scalatestplus-scalacheck"  % "3.1.0.0-RC2" % Test
       )
   }
