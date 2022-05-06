@@ -10,6 +10,7 @@ This is a UK tax year utility.
 * determining the extent of a tax year
 * navigating tax years
 * support scala 2.13 with version 2 and above
+* support for scala 2.11 dropped from version 3
 
 ### Adding tax-year as a dependency
 

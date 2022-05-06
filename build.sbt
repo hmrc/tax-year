@@ -2,7 +2,7 @@ lazy val taxYear = (project in file("."))
   .settings(
     name := "tax-year",
     crossSbtVersions := List("0.13.18", "1.3.4", "1.6.2"),
-    crossScalaVersions := List("2.11.12", "2.12.15", "2.13.8"),
+    crossScalaVersions := List("2.12.15", "2.13.8"),
     developers := List(
       Developer(
         "andy-gray",
@@ -12,7 +12,7 @@ lazy val taxYear = (project in file("."))
       )
     )
   )
-  .settings(majorVersion := 2)
+  .settings(majorVersion := 3)
   .settings(isPublicArtefact := true)
   .settings(ScoverageSettings())
   .settings(
