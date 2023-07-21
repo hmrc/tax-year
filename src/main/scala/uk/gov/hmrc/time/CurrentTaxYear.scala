@@ -28,7 +28,7 @@ trait CurrentTaxYear {
 
   final def firstDayOfTaxYear(year: Int): LocalDate = startOfTaxYear.atYear(year)
 
-  final def today = now()
+  final def today: LocalDate = now()
 
   final def taxYearFor(date: LocalDate): TaxYear = {
     if (date isBefore firstDayOfTaxYear(date.getYear))
