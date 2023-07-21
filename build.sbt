@@ -16,14 +16,13 @@ lazy val taxYear = (project in file("."))
   .settings(isPublicArtefact := true)
   .settings(ScoverageSettings())
   .settings(
-    resolvers += Resolver.typesafeRepo("releases"),
-    resolvers += "hmrc-releases" at "https://artefacts.tax.service.gov.uk/artifactory/hmrc-releases/"
+    resolvers += Resolver.typesafeRepo("releases")
   )
 
 libraryDependencies ++= Seq(
-  "org.threeten"            % "threeten-extra"    % "1.5.0",
-  "com.vladsch.flexmark"    % "flexmark-all"      % "0.36.8"  % Test,
-  "org.pegdown"             %  "pegdown"          % "1.6.0"   % Test
+  "org.threeten"         % "threeten-extra" % "1.7.2",
+  "com.vladsch.flexmark" % "flexmark-all"   % "0.36.8"  % Test,
+  "org.pegdown"          %  "pegdown"       % "1.6.0"   % Test
 )
 
 libraryDependencies := {
