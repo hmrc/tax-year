@@ -2,7 +2,7 @@ tax-year
 ====
 [Download](https://open.artefacts.tax.service.gov.uk/maven2/uk/gov/hmrc/tax-year_2.13/)
 
-This is a UK tax year utility.
+This is a UK tax year utility. Therefore, it uses the `Europe/London` timezone.
 
 ```scala
 import uk.gov.hmrc.time.TaxYear
