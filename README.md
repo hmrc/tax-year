@@ -4,6 +4,13 @@ tax-year
 
 This is a UK tax year utility. Therefore, it uses the `Europe/London` timezone.
 
+Change History
+====
+v4.0 - 05 Dec 23
+- update Scala 2.13 version
+- update library dependencies
+- add 'Change History' section to README
+
 ```scala
 import uk.gov.hmrc.time.TaxYear
 ```

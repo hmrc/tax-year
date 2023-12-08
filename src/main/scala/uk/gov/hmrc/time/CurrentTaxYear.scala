@@ -16,7 +16,7 @@
 
 package uk.gov.hmrc.time
 
-import java.time.{ZoneId, LocalDate, MonthDay}
+import java.time.{LocalDate, MonthDay, ZoneId}
 
 trait CurrentTaxYear {
 
