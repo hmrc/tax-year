@@ -24,7 +24,7 @@ import java.time.{LocalDate, ZoneId, ZonedDateTime}
 class TaxYearSpec extends AnyWordSpecLike with Matchers {
 
   class setUp extends CurrentTaxYear {
-    
+
     var now: () => LocalDate = () => LocalDate.of(2013, 9, 24)
 
     def givenIts(when: ZonedDateTime): Unit = now = () => when.toLocalDate
@@ -118,7 +118,7 @@ class TaxYearSpec extends AnyWordSpecLike with Matchers {
 
     "Return 2012 when the current UK time is 23:59:59.999 on 2013/4/5" in new setUp {
       givenIts(ZonedDateTime.of(2013, 4, 5, 23, 59, 59, 999, ukTimeZone))
-      current shouldBe _2012_13
+      current             shouldBe _2012_13
       current.currentYear shouldBe current.startYear
       current.currentYear shouldBe 2012
     }
@@ -149,7 +149,6 @@ class TaxYearSpec extends AnyWordSpecLike with Matchers {
     }
   }
 
-
   "the tax year 2012-13" should {
     "start on 2012/4/6" in {
       _2012_13.starts shouldBe LocalDate.of(2012, 4, 6)
@@ -165,7 +164,7 @@ class TaxYearSpec extends AnyWordSpecLike with Matchers {
     }
     "span 00:00:00 on 2012/4/6 until 00:00:00 on 2013/4/6" in {
       _2012_13.interval.getStart shouldBe ZonedDateTime.of(2012, 4, 6, 0, 0, 0, 0, ukTimeZone).toInstant
-      _2012_13.interval.getEnd shouldBe ZonedDateTime.of(2013, 4, 6, 0, 0, 0, 0, ukTimeZone).toInstant
+      _2012_13.interval.getEnd   shouldBe ZonedDateTime.of(2013, 4, 6, 0, 0, 0, 0, ukTimeZone).toInstant
     }
     "not contain 5th April 2012 as that's in the last tax year" in {
       _2012_13.contains(LocalDate.of(2012, 4, 5)) shouldBe false
@@ -174,7 +173,7 @@ class TaxYearSpec extends AnyWordSpecLike with Matchers {
     "contain 6th April 2012" in {
       _2012_13.contains(LocalDate.of(2012, 4, 6)) shouldBe true
     }
-    
+
     "contain 31st Dec 2012" in {
       _2012_13.contains(LocalDate.of(2012, 12, 31)) shouldBe true
     }

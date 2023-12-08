@@ -25,15 +25,15 @@ import scala.collection.immutable.Range.Inclusive
 case class TaxYear(startYear: Int) {
 
   lazy val finishYear: Int = startYear + 1
-  def starts: LocalDate = TaxYear.firstDayOfTaxYear(startYear)
-  def startInstant: ZonedDateTime = starts.atStartOfDay(TaxYear.ukTime)
-  lazy val finishes: LocalDate = LocalDate.of(finishYear, 4, 5)
-  def finishInstant: ZonedDateTime = next.startInstant
+  def starts:          LocalDate = TaxYear.firstDayOfTaxYear(startYear)
+  def startInstant:    ZonedDateTime = starts.atStartOfDay(TaxYear.ukTime)
+  lazy val finishes:   LocalDate = LocalDate.of(finishYear, 4, 5)
+  def finishInstant:   ZonedDateTime = next.startInstant
 
   def back(years: Int): TaxYear = TaxYear(startYear - years)
   lazy val previous: TaxYear = back(1)
 
-  lazy val currentYear : Int = startYear
+  lazy val currentYear: Int = startYear
 
   def forwards(years: Int): TaxYear = TaxYear(startYear + years)
   lazy val next: TaxYear = forwards(1)
@@ -41,7 +41,7 @@ case class TaxYear(startYear: Int) {
   def contains(date: LocalDate): Boolean = !(date.isBefore(starts) || date.isAfter(finishes))
 
   def yearRange: Inclusive = startYear to finishYear
-  def interval: Interval = Interval.of(startInstant.toInstant, finishInstant.toInstant)
+  def interval:  Interval = Interval.of(startInstant.toInstant, finishInstant.toInstant)
 
   override def toString = s"$startYear to $finishYear"
 }
