@@ -6,6 +6,8 @@ This is a UK tax year utility. Therefore, it uses the `Europe/London` timezone.
 
 Change History
 ====
+v6.0 - 28 Mar 25
+- update library dependencies
 
 v5.0 - 19 Jun 24
 - add Scala 3.0 support, noting Scala 2.13 is still supported
